@@ -18,6 +18,13 @@ import json
 from datetime import datetime
 import os
 
+# Force TensorFlow to ignore all GPUs and run on CPU only
+try:
+    tf.config.set_visible_devices([], "GPU")
+except Exception:
+    # If there are no GPUs or this fails, just continue
+    pass
+
 # ===================== CONFIGURATION =====================
 class Config:
     """Configuration class for easy parameter management"""
