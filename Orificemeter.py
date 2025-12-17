@@ -630,3 +630,29 @@ if __name__ == "__main__":
     print("\n" + "=" * 80)
     print("Analysis Complete!")
     print("=" * 80)
+
+
+def run_orificemeter():
+    """
+    Simple wrapper for Streamlit: run a minimal workflow and return text.
+    Replace this with your real training / inference pipeline later.
+    """
+    # Example: just build the model and return a message
+    model = AdvancedPINNModel(config)
+    loss_fn = AdvancedPINNLoss(config)
+    utils = TrainingUtilities(config)
+
+    # Here you could load a checkpoint or run a very short dummy training.
+    # For now, we just return a simple string so Streamlit shows something.
+    summary = (
+        "Orificemeter PINN initialized.\n"
+        f"TUBE_DIAMETER = {config.TUBE_DIAMETER} m\n"
+        f"ORIFICE_DIAMETER = {config.ORIFICE_DIAMETER} m\n"
+    )
+    return summary
+
+
+if __name__ == "__main__":
+    # Optional: allow running this file directly from the terminal
+    print(run_orificemeter())
+
