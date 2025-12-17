@@ -1,2 +1,8 @@
 streamlit
 tensorflow
+matplotlib
+numpy
+json
+os
+datetime
+
