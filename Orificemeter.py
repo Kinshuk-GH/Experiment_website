@@ -633,26 +633,66 @@ if __name__ == "__main__":
 
 
 def run_orificemeter():
-    """
-    Simple wrapper for Streamlit: run a minimal workflow and return text.
-    Replace this with your real training / inference pipeline later.
-    """
-    # Example: just build the model and return a message
+
+    train_utils = TrainingUtilities(config)
     model = AdvancedPINNModel(config)
-    loss_fn = AdvancedPINNLoss(config)
-    utils = TrainingUtilities(config)
 
-    # Here you could load a checkpoint or run a very short dummy training.
-    # For now, we just return a simple string so Streamlit shows something.
-    summary = (
-        "Orificemeter PINN initialized.\n"
-        f"TUBE_DIAMETER = {config.TUBE_DIAMETER} m\n"
-        f"ORIFICE_DIAMETER = {config.ORIFICE_DIAMETER} m\n"
-    )
-    return summary
+    start_epoch = 0  # default: start from scratch
 
+    if os.path.isdir(config.CHECKPOINT_DIR):
+        ckpt_files = [f for f in os.listdir(config.CHECKPOINT_DIR)
+                      if f.endswith(".h5")]
 
-if __name__ == "__main__":
-    # Optional: allow running this file directly from the terminal
-    print(run_orificemeter())
+        if len(ckpt_files) > 0:
+            latest = max(ckpt_files, key=extract_epoch_from_filename)
+            latest_epoch = extract_epoch_from_filename(latest)
+            ckpt_path = os.path.join(config.CHECKPOINT_DIR, latest)
 
+            print(f"\n🔄 Resuming from checkpoint: {ckpt_path}")
+            print(f"➡ Starting from epoch {latest_epoch + 1}")
+
+            dummy_input = tf.zeros((1, 2), dtype=tf.float32)
+            model(dummy_input)
+
+            model.load_weights(ckpt_path)
+            start_epoch = latest_epoch    # continue from next epoch
+        else:
+            print("No checkpoints found. Training from scratch.")
+    else:
+        print("Checkpoint directory not found. Training from scratch.")
+    
+    # Train model
+    model, losses = train_advanced_pinn(config, model, start_epoch=start_epoch)
+    
+    print("\n" + "=" * 80)
+    print("Training Complete!")
+    print("=" * 80)
+    
+    # Post-processing
+    print("\nComputing coefficient of discharge...")
+    results = PostProcessor.compute_coefficient_of_discharge(model)
+    
+    print(f"\n--- Discharge Analysis Results ---")
+    print(f"Coefficient of Discharge (Cd): {results['Cd']:.4f}")
+    print(f"  Expected range (orifice): 0.60 - 0.65")
+    print(f"\nFlow Rates:")
+    print(f"  Upstream Q: {results['Q_upstream']:.6f} m³/s")
+    print(f"  Downstream Q: {results['Q_downstream']:.6f} m³/s")
+    print(f"  Actual Q: {results['Q_actual']:.6f} m³/s")
+    print(f"  Theoretical Q: {results['Q_theoretical']:.6f} m³/s")
+    print(f"\nPressure Distribution:")
+    print(f"  Upstream P: {results['p_upstream']:.3f} Pa")
+    print(f"  Downstream P: {results['p_downstream']:.3f} Pa")
+    print(f"  Pressure drop: {results['delta_p']:.3f} Pa")
+    print(f"\nVena Contracta:")
+    print(f"  Ratio (A_vc / A_orifice): {results['vena_contracta_ratio']:.3f}")
+    
+    # Generate plots
+    print("\nGenerating advanced visualizations...")
+    PostProcessor.plot_advanced_results(model, losses)
+    
+    print("\n" + "=" * 80)
+    print("Analysis Complete!")
+    print("=" * 80)
+
+    return None
