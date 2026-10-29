@@ -39,7 +39,10 @@ if st.query_params.get("page", "home") != "cylinder":
     with a:
         with st.container(border=True):
             st.subheader("Fluid Mechanics")
-            st.markdown(f"1. [{EXPERIMENT}](?page=cylinder)")
+            st.markdown(
+                f'1. <a href="?page=cylinder" target="_self">{EXPERIMENT}</a>',
+                unsafe_allow_html=True,
+            )
             st.write("Investigate air speed, pressure, and flow direction around a stationary circular cylinder.")
     with b:
         with st.container(border=True):
@@ -47,7 +50,10 @@ if st.query_params.get("page", "home") != "cylinder":
             st.write("Experiments coming soon.")
     st.stop()
 
-st.markdown("[← Back to Main page](?page=home)")
+st.markdown(
+    '<a href="?page=home" target="_self">← Back to Main page</a>',
+    unsafe_allow_html=True,
+)
 st.title(EXPERIMENT)
 st.caption(TITLE+" · Fluid Mechanics")
 st.write("Imagine a gentle stream of air meeting a round pole. The air must move around it, "
