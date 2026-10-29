@@ -1,0 +1,7 @@
+AUTOMATED CHECKS
+8 Reynolds-number validation cases passed
+Valid Cd table sorted; empty row ignored
+6 invalid Cd table cases rejected
+PNG and PDF generation signatures checked
+Python syntax: all modules passed.
+Full UI/inference/Gemma integration not yet tested. Checkpoint and original model environment not supplied.

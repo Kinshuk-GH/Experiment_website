@@ -1,5 +1,6 @@
-streamlit>=1.36,<2.0
-numpy>=1.26
-matplotlib>=3.8
-torch>=2.2
-scimba>=1.3.4,<1.5
+streamlit>=1.44,<2
+numpy
+pandas
+matplotlib
+torch
+# Install the same scimba_torch package/version used during training separately.
