@@ -1,4 +1,6 @@
-streamlit
-tensorflow
-matplotlib
-numpy
+streamlit>=1.36,<2.0
+numpy>=1.26
+matplotlib>=3.8
+torch>=2.2
+# Install the same scimba_torch package/version used to train the supplied checkpoint.
+# Add its exact installation source/version here if it is not available from PyPI.

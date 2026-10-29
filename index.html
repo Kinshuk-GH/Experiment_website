@@ -1,88 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thermofluid Lab</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f4f4f4;
-            color: #222;
-        }
-        header {
-            background: #003366;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        main {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 0 15px;
-        }
-        h1, h2 {
-            margin-bottom: 10px;
-        }
-        .experiment-card {
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 18px;
-            margin-top: 10px;
-            background: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
-        footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thermofluid Lab | Virtual Experiments</title>
+  <meta name="description" content="Student-friendly virtual experiments in fluid mechanics and heat transfer.">
+  <style>
+    :root { --navy:#12304a; --blue:#1769aa; --pale:#eef6fb; --ink:#1f2933; --muted:#52606d; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif; color:var(--ink); background:#f6f9fc; line-height:1.6; }
+    header { color:white; padding:56px 20px 48px; background:linear-gradient(125deg,#12304a,#1769aa); }
+    .wrap { max-width:1000px; margin:auto; padding:0 22px; }
+    header h1 { margin:0 0 8px; font-size:clamp(2rem,5vw,3.2rem); line-height:1.15; }
+    header p { max-width:700px; margin:10px 0 0; color:#e6f2ff; font-size:1.1rem; }
+    main { padding:34px 0 55px; }
+    h2 { margin-top:0; }
+    .intro { max-width:760px; margin-bottom:28px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:18px; }
+    .card { background:white; padding:24px; border-radius:14px; border:1px solid #d9e2ec; box-shadow:0 5px 18px #102a430b; }
+    .tag { display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.04em; color:#155e75; background:#cffafe; border-radius:99px; padding:4px 10px; }
+    .card h3 { margin:12px 0 8px; }
+    .card p { color:var(--muted); }
+    .btn { display:inline-block; margin-top:8px; padding:11px 16px; border-radius:8px; background:var(--blue); color:white; text-decoration:none; font-weight:650; }
+    .btn:hover { background:#0d4f86; }
+    .note { margin-top:22px; padding:16px 18px; background:var(--pale); border-left:4px solid var(--blue); border-radius:7px; }
+    footer { border-top:1px solid #d9e2ec; color:var(--muted); text-align:center; padding:20px; font-size:.9rem; }
+  </style>
 </head>
 <body>
-
 <header>
+  <div class="wrap">
     <h1>Thermofluid Lab</h1>
-    <p>Virtual experiments using classical thermofluid concepts</p>
-    <p>Site under construction</p>
+    <p>Explore how air and water move, how heat travels, and why engineering systems behave the way they do — one virtual experiment at a time.</p>
+  </div>
 </header>
-
-<main>
-    <section>
-        <h2>Experiments</h2>
-        <p>Select an experiment to open the interactive app.</p>
-
-        <div class="experiment-card">
-            <h3>Orificemeter</h3>
-            <p>
-                Analyze flow through an orificemeter and compute discharge, pressure drop,
-                and related parameters.
-            </p>
-            <!-- Replace the href below with your actual Streamlit app URL -->
-            <a class="btn" href="https://your-orificemeter-app.streamlit.app" target="_blank">
-                Open Orificemeter Experiment
-            </a>
-        </div>
-    </section>
+<main class="wrap">
+  <section class="intro">
+    <h2>Choose an experiment</h2>
+    <p>These activities are designed to explain the ideas in everyday language first, then let you explore the engineering results. More experiments can be added as separate cards below.</p>
+  </section>
+  <section class="grid" aria-label="Available experiments">
+    <article class="card">
+      <span class="tag">FLUID MECHANICS</span>
+      <h3>Air flowing past a cylinder</h3>
+      <p>Change the Reynolds number and explore predicted air speed, pressure, and flow paths around a circular object. The results are generated using a pre-trained physics-informed neural network.</p>
+      <!-- Replace the URL below with your deployed Streamlit app URL. -->
+      <a class="btn" href="https://YOUR-STREAMLIT-APP-URL.streamlit.app" target="_blank" rel="noopener noreferrer">Open experiment ↗</a>
+    </article>
+    <!-- Add future experiments by copying an article.card block and updating its title, description and link. -->
+    <article class="card">
+      <span class="tag">COMING NEXT</span>
+      <h3>More experiments soon</h3>
+      <p>This space is reserved for future Fluid Mechanics and Heat Transfer experiments, such as pipe flow, heat conduction, or convection.</p>
+    </article>
+  </section>
+  <div class="note"><strong>For students:</strong> a simulation is a computer-based prediction. Real experiments and measurements are important for checking whether a prediction is accurate.</div>
 </main>
-
-<footer>
-    &copy; 2025 Thermofluid Lab
-</footer>
-
+<footer>Thermofluid Lab · Virtual learning for Fluid Mechanics and Heat Transfer</footer>
 </body>
 </html>
